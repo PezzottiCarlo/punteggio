@@ -1,0 +1,117 @@
+<!DOCTYPE html>
+<html lang="it">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <title>Conteggio Punti</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background-color: #f4f4f4;
+      margin: 0;
+      padding: 0;
+      display: flex;
+      flex-direction: column;
+      align-items: center;
+      justify-content: center;
+      height: 100vh;
+    }
+    h1 {
+      color: #333;
+    }
+    .container {
+      background: #fff;
+      padding: 20px;
+      border-radius: 8px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      width: 300px;
+      text-align: center;
+    }
+    .points {
+      display: flex;
+      justify-content: space-between;
+      margin-bottom: 20px;
+    }
+    button {
+      background-color: #007BFF;
+      color: white;
+      border: none;
+      padding: 10px 20px;
+      border-radius: 5px;
+      cursor: pointer;
+      font-size: 14px;
+    }
+    button:disabled {
+      background-color: #d3d3d3;
+      cursor: not-allowed;
+    }
+    button:hover:not(:disabled) {
+      background-color: #0056b3;
+    }
+    .result {
+      margin-top: 20px;
+      font-size: 18px;
+      font-weight: bold;
+    }
+    input[type="number"] {
+      width: 70px;
+      padding: 5px;
+      font-size: 14px;
+      text-align: center;
+    }
+  </style>
+</head>
+<body>
+  <h1>Conteggio Punti</h1>
+  <div class="container">
+    <div class="points">
+      <button onclick="setPoints(10)">+10</button>
+      <button onclick="setPoints(20)">+20</button>
+      <button onclick="setPoints(30)">+30</button>
+      <input type="number" id="custom-points" placeholder="Custom" />
+    </div>
+    <div>
+      <button onclick="setMode('+')">+</button>
+      <button onclick="setMode('-')">-</button>
+    </div>
+    <div>
+      <button onclick="submitPoints()">Submit</button>
+    </div>
+    <div class="result">Punteggio Totale: <span id="total-score">0</span></div>
+  </div>
+
+  <script>
+    let mode = '+';
+    let totalScore = 0;
+
+    // Inizializza il punteggio dal localStorage
+    if (localStorage.getItem('totalScore')) {
+      totalScore = parseInt(localStorage.getItem('totalScore'), 10);
+      updateScore();
+    }
+
+    function setMode(newMode) {
+      mode = newMode;
+    }
+
+    function setPoints(points) {
+      document.getElementById('custom-points').value = points;
+    }
+
+    function submitPoints() {
+      const points = parseInt(document.getElementById('custom-points').value, 10);
+      if (isNaN(points)) {
+        alert('Inserisci un valore valido');
+        return;
+      }
+      totalScore = mode === '+' ? totalScore + points : totalScore - points;
+      localStorage.setItem('totalScore', totalScore);
+      updateScore();
+    }
+
+    function updateScore() {
+      document.getElementById('total-score').textContent = totalScore;
+    }
+  </script>
+</body>
+</html>
