@@ -6,8 +6,8 @@
   <title>Conteggio Punti</title>
   <style>
     body {
-      font-family: Arial, sans-serif;
-      background-color: #f4f4f4;
+      font-family: 'Arial', sans-serif;
+      background-color: #f9f9f9;
       margin: 0;
       padding: 0;
       display: flex;
@@ -18,46 +18,78 @@
     }
     h1 {
       color: #333;
+      margin-bottom: 20px;
+      font-size: 24px;
     }
     .container {
       background: #fff;
       padding: 20px;
-      border-radius: 8px;
-      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-      width: 300px;
-      text-align: center;
+      border-radius: 12px;
+      box-shadow: 0 4px 8px rgba(0, 0, 0, 0.1);
+      width: 90%;
+      max-width: 400px;
+      display: flex;
+      flex-direction: column;
+      gap: 15px;
     }
     .points {
       display: flex;
-      justify-content: space-between;
-      margin-bottom: 20px;
+      flex-wrap: wrap;
+      gap: 10px;
+      justify-content: center;
     }
     button {
       background-color: #007BFF;
-      color: white;
+      color: #fff;
       border: none;
       padding: 10px 20px;
-      border-radius: 5px;
+      border-radius: 8px;
+      font-size: 16px;
+      flex: 1;
+      max-width: 80px;
+      text-align: center;
       cursor: pointer;
-      font-size: 14px;
+      transition: background-color 0.3s ease;
     }
-    button:disabled {
-      background-color: #d3d3d3;
-      cursor: not-allowed;
-    }
-    button:hover:not(:disabled) {
+    button:hover {
       background-color: #0056b3;
     }
-    .result {
-      margin-top: 20px;
-      font-size: 18px;
-      font-weight: bold;
+    button:disabled {
+      background-color: #ccc;
+      cursor: not-allowed;
+    }
+    .mode-buttons {
+      display: flex;
+      gap: 10px;
+      justify-content: center;
+    }
+    .mode-buttons button {
+      flex: 1;
+      max-width: 100px;
     }
     input[type="number"] {
-      width: 70px;
-      padding: 5px;
-      font-size: 14px;
+      width: 100%;
+      padding: 10px;
+      font-size: 16px;
       text-align: center;
+      border: 1px solid #ddd;
+      border-radius: 8px;
+      margin-top: 10px;
+    }
+    .submit-button {
+      background-color: #28a745;
+      font-size: 18px;
+      padding: 12px;
+      text-transform: uppercase;
+    }
+    .submit-button:hover {
+      background-color: #218838;
+    }
+    .result {
+      text-align: center;
+      font-size: 20px;
+      font-weight: bold;
+      color: #333;
     }
   </style>
 </head>
@@ -68,15 +100,13 @@
       <button onclick="setPoints(10)">+10</button>
       <button onclick="setPoints(20)">+20</button>
       <button onclick="setPoints(30)">+30</button>
-      <input type="number" id="custom-points" placeholder="Custom" />
     </div>
-    <div>
-      <button onclick="setMode('+')">+</button>
-      <button onclick="setMode('-')">-</button>
+    <input type="number" id="custom-points" placeholder="Inserisci valore personalizzato" />
+    <div class="mode-buttons">
+      <button onclick="setMode('+')">Aggiungi</button>
+      <button onclick="setMode('-')">Sottrai</button>
     </div>
-    <div>
-      <button onclick="submitPoints()">Submit</button>
-    </div>
+    <button class="submit-button" onclick="submitPoints()">Salva Punti</button>
     <div class="result">Punteggio Totale: <span id="total-score">0</span></div>
   </div>
 
